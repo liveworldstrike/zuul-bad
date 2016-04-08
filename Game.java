@@ -19,7 +19,7 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
-        
+
     /**
      * Create the game and initialise its internal map.
      */
@@ -34,23 +34,23 @@ public class Game
      */
     private void createRooms()
     {
-        Room outside, theater, pub, lab, office;
-      
-        // create the rooms
-        outside = new Room("outside the main entrance of the university");
-        theater = new Room("in a lecture theater");
-        pub = new Room("in the campus pub");
-        lab = new Room("in a computing lab");
-        office = new Room("in the computing admin office");
-        
-        // initialise room exits
-        outside.setExits(null, theater, lab, pub);
-        theater.setExits(null, null, null, outside);
-        pub.setExits(null, outside, null, null);
-        lab.setExits(outside, office, null, null);
-        office.setExits(null, null, null, lab);
+        Room entrada, salaDeClases, baño , vestuario, salaDeMaquinas ;
 
-        currentRoom = outside;  // start game outside
+        // create the rooms
+        entrada = new Room("entrada al gym");
+        salaDeClases= new Room("sala de clases");
+        baño = new Room("en el baño");
+        vestuario = new Room("en el vestuario");
+        salaDeMaquinas = new Room("en la sala de maquinas");
+
+        // initialise room exits(arriba,derecha,abajo,izquierda)
+        entrada.setExits(null, salaDeClases, vestuario, null);
+        salaDeClases.setExits(baño, null, salaDeMaquinas, entrada);
+        baño.setExits(null, null, salaDeClases, null);
+        vestuario.setExits(entrada, salaDeMaquinas, null, null);
+        salaDeMaquinas.setExits(salaDeClases, null, null, vestuario);
+
+        currentRoom = entrada;  // start game outside
     }
 
     /**
@@ -62,7 +62,7 @@ public class Game
 
         // Enter the main command loop.  Here we repeatedly read commands and
         // execute them until the game is over.
-                
+
         boolean finished = false;
         while (! finished) {
             Command command = parser.getCommand();

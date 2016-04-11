@@ -19,7 +19,10 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
-
+    private static final int INTENTOS = 7;
+    private static final String OBJETIVO ="en el baño";
+    private static final String SALIDA_CON_OBJETIVO ="entrada al gym";
+    private boolean mando = false;
     /**
      * Create the game and initialise its internal map.
      */
@@ -62,13 +65,37 @@ public class Game
 
         // Enter the main command loop.  Here we repeatedly read commands and
         // execute them until the game is over.
-
+        boolean mando = false;
+        boolean salida =false;
         boolean finished = false;
-        while (! finished) {
+        int cont = 0;
+        while(!finished && cont <= INTENTOS && !mando || !salida)
+        {
             Command command = parser.getCommand();
             finished = processCommand(command);
+            cont++;
+            if (currentRoom.getDescription().equals(OBJETIVO)){
+                mando = true;
+                System.out.println("you take the gamepad,RUN TO ENTRADA");
+
+            }
+            if (currentRoom.getDescription().equals(SALIDA_CON_OBJETIVO)){
+                salida = true;
+
+            }
         }
-        System.out.println("Thank you for playing.  Good bye.");
+
+        if(finished){
+            System.out.println("you exit the game");
+        }
+
+        else if (salida && mando){
+            System.out.println("YOU WIN,RUN TO THE TOURNAMENT!!!!");
+            System.out.println("THANKS FOR PLAYING");
+        }
+        else if ( cont >= INTENTOS){
+            System.out.println("TOO LATE YOU LOSE");
+        }
     }
 
     /**
@@ -122,10 +149,11 @@ public class Game
     private void printHelp() 
     {
         System.out.println("You are lost. You are alone. You wander");
-        System.out.println("around at the university.");
+        System.out.println("around at the gym.");
         System.out.println();
         System.out.println("Your command words are:");
-        System.out.println("   go quit help");
+        System.out.println(" go quit help");
+        System.out.println("if you write wrong,the movement is counted");
     }
 
     /** 
@@ -181,7 +209,7 @@ public class Game
             return true;  // signal that we want to quit
         }
     }
-    
+
     /**
      * metodo que nos da la posicion del jugador y para donde queremos ir 
      */

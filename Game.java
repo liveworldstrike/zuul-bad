@@ -47,11 +47,24 @@ public class Game
         salaDeMaquinas = new Room("en la sala de maquinas");
 
         // initialise room exits(arriba,derecha,abajo,izquierda)
-        entrada.setExits(null, salaDeClases, vestuario, null,salaDeMaquinas,null);
-        salaDeClases.setExits(baño, null, salaDeMaquinas, entrada,null,null);
-        baño.setExits(null, null, salaDeClases, null,null,null);
-        vestuario.setExits(entrada, salaDeMaquinas, null, null,null,null);
-        salaDeMaquinas.setExits(salaDeClases, null, null, vestuario,null,entrada);
+
+        entrada.setExit("east" , salaDeClases);
+        entrada.setExit("south" , vestuario);
+        entrada.setExit("southEast" , salaDeClases);
+
+        salaDeClases.setExit("north" , baño);
+        salaDeClases.setExit("south" , salaDeMaquinas);
+        salaDeClases.setExit("west" , entrada);
+        
+
+        baño.setExit("south" , salaDeClases);
+
+        vestuario.setExit("north" , entrada);
+        vestuario.setExit("east" , salaDeMaquinas);
+
+        salaDeMaquinas.setExit("north" , salaDeClases);
+        salaDeMaquinas.setExit("west" , vestuario);
+        salaDeMaquinas.setExit("northWest", entrada);
 
         currentRoom = entrada;  // start game outside
     }
@@ -171,9 +184,9 @@ public class Game
         String direction = command.getSecondWord();
 
         // Try to leave current room
-        
+
         Room nextRoom = currentRoom.getExit(direction);
-        
+
         if (nextRoom == null) {
             System.out.println("There is no door!");
         }

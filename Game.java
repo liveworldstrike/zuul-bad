@@ -22,7 +22,7 @@ public class Game
     private static final int INTENTOS = 7;
     private static final String OBJETIVO ="en el baño";
     private static final String SALIDA_CON_OBJETIVO ="entrada al gym";
-    private boolean mando = false;
+    
     /**
      * Create the game and initialise its internal map.
      */

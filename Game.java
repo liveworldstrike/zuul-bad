@@ -22,7 +22,7 @@ public class Game
     private static final int INTENTOS = 7;
     private static final String OBJETIVO ="en el baño";
     private static final String SALIDA_CON_OBJETIVO ="entrada al gym";
-    
+
     /**
      * Create the game and initialise its internal map.
      */
@@ -47,11 +47,11 @@ public class Game
         salaDeMaquinas = new Room("en la sala de maquinas");
 
         // initialise room exits(arriba,derecha,abajo,izquierda)
-        entrada.setExits(null, salaDeClases, vestuario, null);
-        salaDeClases.setExits(baño, null, salaDeMaquinas, entrada);
-        baño.setExits(null, null, salaDeClases, null);
-        vestuario.setExits(entrada, salaDeMaquinas, null, null);
-        salaDeMaquinas.setExits(salaDeClases, null, null, vestuario);
+        entrada.setExits(null, salaDeClases, vestuario, null,salaDeMaquinas);
+        salaDeClases.setExits(baño, null, salaDeMaquinas, entrada,null);
+        baño.setExits(null, null, salaDeClases, null,null);
+        vestuario.setExits(entrada, salaDeMaquinas, null, null,null);
+        salaDeMaquinas.setExits(salaDeClases, null, null, vestuario,null);
 
         currentRoom = entrada;  // start game outside
     }
@@ -184,6 +184,9 @@ public class Game
         if(direction.equals("west")) {
             nextRoom = currentRoom.westExit;
         }
+        if(direction.equals("southEast")) {
+            nextRoom = currentRoom.southEastExit;
+        }
 
         if (nextRoom == null) {
             System.out.println("There is no door!");
@@ -228,6 +231,9 @@ public class Game
         }
         if(currentRoom.westExit != null) {
             System.out.print("west ");
+        }
+        if(currentRoom.southEastExit != null) {
+            System.out.print("southEast ");
         }
         System.out.println();
     }

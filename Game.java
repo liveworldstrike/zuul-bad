@@ -47,11 +47,11 @@ public class Game
         salaDeMaquinas = new Room("en la sala de maquinas");
 
         // initialise room exits(arriba,derecha,abajo,izquierda)
-        entrada.setExits(null, salaDeClases, vestuario, null,salaDeMaquinas);
-        salaDeClases.setExits(baño, null, salaDeMaquinas, entrada,null);
-        baño.setExits(null, null, salaDeClases, null,null);
-        vestuario.setExits(entrada, salaDeMaquinas, null, null,null);
-        salaDeMaquinas.setExits(salaDeClases, null, null, vestuario,null);
+        entrada.setExits(null, salaDeClases, vestuario, null,salaDeMaquinas,null);
+        salaDeClases.setExits(baño, null, salaDeMaquinas, entrada,null,null);
+        baño.setExits(null, null, salaDeClases, null,null,null);
+        vestuario.setExits(entrada, salaDeMaquinas, null, null,null,null);
+        salaDeMaquinas.setExits(salaDeClases, null, null, vestuario,null,entrada);
 
         currentRoom = entrada;  // start game outside
     }

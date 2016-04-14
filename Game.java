@@ -40,11 +40,11 @@ public class Game
         Room entrada, salaDeClases, baño , vestuario, salaDeMaquinas ;
 
         // create the rooms
-        entrada = new Room("entrada al gym");
-        salaDeClases= new Room("sala de clases");
-        baño = new Room("en el baño");
-        vestuario = new Room("en el vestuario");
-        salaDeMaquinas = new Room("en la sala de maquinas");
+        entrada = new Room("entrada al gym","una pesa",3);
+        salaDeClases= new Room("sala de clases","una bola",1);
+        baño = new Room("en el baño","un mando",2);
+        vestuario = new Room("en el vestuario","unos calzones",2);
+        salaDeMaquinas = new Room("en la sala de maquinas","una cuerda",4);
 
         // initialise room exits(arriba,derecha,abajo,izquierda)
 

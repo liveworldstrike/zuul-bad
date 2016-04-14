@@ -62,4 +62,12 @@ public class Parser
             return new Command(null, word2); 
         }
     }
+
+    /**
+     * retorna los comandos
+     */
+    public CommandWords getCommands()
+    {
+        return commands;
+    }
 }

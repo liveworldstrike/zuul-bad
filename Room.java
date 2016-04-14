@@ -52,21 +52,7 @@ public class Room
      * datos de todas las salidas
      */
     public Room getExit(String direction){
-        Room roomReturn = null;
-
-        if(direction.equals("north"))
-            roomReturn = exits.get("north");
-        if(direction.equals("east"))
-            roomReturn = exits.get("east");
-        if(direction.equals("south"))
-            roomReturn = exits.get("south");
-        if(direction.equals("west"))
-            roomReturn = exits.get("west");
-        if(direction.equals("southEast"))
-            roomReturn = exits.get("southEast");
-        if(direction.equals("northWest"))
-            roomReturn = exits.get("northWest");
-        return roomReturn;
+        return exits.get(direction);
     }
 
     /**
@@ -76,26 +62,11 @@ public class Room
      * @ return A description of the available exits.
      */
     public String getExitString(){
-        String salidasDatos = "Exits: ";
-        if(exits.get("north") != null) {
-            salidasDatos += " north ";
+       String salidasDatos = "Exits: ";
+       for(String direction : exits.keySet()){
+           salidasDatos += direction + " ";
         }
-        if(exits.get("east") != null) {
-            salidasDatos += "east ";
-        }
-        if(exits.get("south") != null) {
-            salidasDatos += "south ";
-        }
-        if(exits.get("west") != null) {
-            salidasDatos += "west ";
-        }
-        if(exits.get("southEast") != null) {
-            salidasDatos += "southEast ";
-        }
-        if(exits.get("northWest")  != null) {
-            salidasDatos += "northWest ";
-        }
-        return salidasDatos;
+       return salidasDatos;
     }
     
     /**

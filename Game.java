@@ -168,10 +168,8 @@ public class Game
         System.out.println("around at the gym.");
         System.out.println();
         //Opcion1
-        parser.getCommands().showAll();
-        
-        System.out.println(" go quit help look");
-        System.out.println("if you write wrong,the movement is counted");
+        //parser.getCommands().showAll();
+        parser.printCommands();
     }
 
     /** 

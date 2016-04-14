@@ -71,5 +71,12 @@ public class Parser
         return commands;
     }
     
+     /**
+     * imprime los comandos 
+     */
+    public void printCommands()
+    {
+        commands.showAll();
+    }
    
 }

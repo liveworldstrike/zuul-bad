@@ -1,3 +1,4 @@
+import java.util.*;
 /**
  *  This class is the main class of the "World of Zuul" application. 
  *  "World of Zuul" is a very simple, text based adventure game.  Users 
@@ -19,7 +20,7 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
-    private Room previusRoom;
+    private Stack<Room> passRoom;
     private static final int INTENTOS = 7;
     private static final String OBJETIVO ="en el baño";
     private static final String SALIDA_CON_OBJETIVO ="entrada al gym";
@@ -69,7 +70,7 @@ public class Game
         salaDeMaquinas.setExit("northWest", entrada);
 
         currentRoom = entrada;  // start game outside
-        previusRoom = null;
+        passRoom = new Stack<Room>();
     }
 
     /**
@@ -85,20 +86,20 @@ public class Game
         boolean salida =false;
         boolean finished = false;
         int cont = 0;
-        while(!finished && cont <= INTENTOS || !mando || !salida)
+        while(!finished) //&& cont <= INTENTOS || !mando || !salida)
         {
             Command command = parser.getCommand();
             finished = processCommand(command);
-            cont++;
-            if (currentRoom.getDescription().equals(OBJETIVO)){
-                mando = true;
-                System.out.println("you take the gamepad,RUN TO ENTRADA");
-
-            }
-            if (currentRoom.getDescription().equals(SALIDA_CON_OBJETIVO)){
-                salida = true;
-
-            }
+            //             cont++;
+            //             if (currentRoom.getDescription().equals(OBJETIVO)){
+            //                 mando = true;
+            //                 System.out.println("you take the gamepad,RUN TO ENTRADA");
+            // 
+            //             }
+            //             if (currentRoom.getDescription().equals(SALIDA_CON_OBJETIVO)){
+            //                 salida = true;
+            // 
+            //             }
         }
 
         if(finished){
@@ -203,7 +204,7 @@ public class Game
             System.out.println("There is no door!");
         }
         else {
-            previusRoom = currentRoom;
+            passRoom.push(currentRoom);
             currentRoom = nextRoom;
             printLocationInfo();
         }
@@ -237,13 +238,13 @@ public class Game
      * comando para que el jugador vuela atras 
      */
     private void goBack(){
-        if (previusRoom == null){
-            System.out.println("no hay vuelta atras muajjajajaj");
+        if (!passRoom.empty()){
+            currentRoom = passRoom.pop();
+            printLocationInfo();
         }
         else{
-            currentRoom = previusRoom;
-            printLocationInfo();
-            previusRoom = null;
+
+            System.out.println("Estas en el princpio no puedes ir mas atras");
         }
     }
 }

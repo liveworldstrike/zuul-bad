@@ -19,6 +19,7 @@ public class Game
 {
     private Parser parser;
     private Room currentRoom;
+    private Room previusRoom;
     private static final int INTENTOS = 7;
     private static final String OBJETIVO ="en el baño";
     private static final String SALIDA_CON_OBJETIVO ="entrada al gym";
@@ -49,7 +50,7 @@ public class Game
         //objetos de las salas 
         baño.addItem("un mando",2);
         vestuario.addItem("unos calzones",2);
-            // initialise room exits(arriba,derecha,abajo,izquierda)
+        // initialise room exits(arriba,derecha,abajo,izquierda)
 
         entrada.setExit("east" , salaDeClases);
         entrada.setExit("south" , vestuario);
@@ -68,6 +69,7 @@ public class Game
         salaDeMaquinas.setExit("northWest", entrada);
 
         currentRoom = entrada;  // start game outside
+        previusRoom = null;
     }
 
     /**
@@ -153,7 +155,10 @@ public class Game
             System.out.println(currentRoom.getLongDescription());
         }
         else if (commandWord.equals("eat")) {
-            System.out.println("You have eaten now and you are not hungry any more");;
+            System.out.println("You have eaten now and you are not hungry any more");
+        }
+        else if (commandWord.equals("back")) {
+            goBack();
         }
 
         return wantToQuit;
@@ -198,6 +203,7 @@ public class Game
             System.out.println("There is no door!");
         }
         else {
+            previusRoom = currentRoom;
             currentRoom = nextRoom;
             printLocationInfo();
         }
@@ -225,6 +231,19 @@ public class Game
     private void printLocationInfo()
     {
         System.out.println(currentRoom.getLongDescription());
+    }
 
+    /**
+     * comando para que el jugador vuela atras 
+     */
+    private void goBack(){
+        if (previusRoom == null){
+            System.out.println("no hay vuelta atras muajjajajaj");
+        }
+        else{
+            currentRoom = previusRoom;
+            printLocationInfo();
+            previusRoom = null;
+        }
     }
 }

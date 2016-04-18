@@ -1,4 +1,5 @@
-import java.util.HashMap;
+import java.util.*;
+
 /**
  * Class Room - a room in an adventure game.
  *
@@ -17,21 +18,20 @@ public class Room
 {
     private String description;
     private HashMap<String, Room> exits;
-    private String item;
-    private float pesoItem;
-    
+    private ArrayList<Item> items;
+
     /**
      * Create a room described "description". Initially, it has
      * no exits. "description" is something like "a kitchen" or
      * "an open court yard".
      * @param description The room's description.
      */
-    public Room(String description,String item,float pesoItem) 
+    public Room(String description) 
     {
         this.description = description;
+        items = new ArrayList<Item>(0);
         exits = new HashMap<>();
-        this.item=item;
-        this.pesoItem=pesoItem;
+
     }
 
     /**
@@ -67,13 +67,13 @@ public class Room
      * @ return A description of the available exits.
      */
     public String getExitString(){
-       String salidasDatos = "Exits: ";
-       for(String direction : exits.keySet()){
-           salidasDatos += direction + " ";
+        String salidasDatos = "Exits: ";
+        for(String direction : exits.keySet()){
+            salidasDatos += direction + " ";
         }
-       return salidasDatos;
+        return salidasDatos;
     }
-    
+
     /**
      * Return a long description of this room, of the form:
      *     You are in the 'name of room'
@@ -81,9 +81,24 @@ public class Room
      * @return A description of the room, including exits.
      */
     public String getLongDescription(){
-        String longDescription = getDescription() + "\n" + getExitString()+"\n";
-        longDescription+= "this is one item:\n";
-        longDescription+= item + "("+ pesoItem + ")";
+        String longDescription = getDescription() + "\nObjetos en la sala:";
+        if (items.size() > 0){
+            for(Item objItem : items){
+                longDescription += ""  + objItem.getLongDescription();
+
+            }
+        }
+        else{
+            longDescription += "no hay objetos en la sala" ;
+        }
+        longDescription +="\n" + getExitString();
         return longDescription;
+    }
+
+    /**
+     * añade un item a la habitacion
+     */
+    public void addItem(String item,float pesoItem){
+        items.add(new Item(item,pesoItem));
     }
 }

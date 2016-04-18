@@ -40,13 +40,16 @@ public class Game
         Room entrada, salaDeClases, baño , vestuario, salaDeMaquinas ;
 
         // create the rooms
-        entrada = new Room("entrada al gym","una pesa",3);
-        salaDeClases= new Room("sala de clases","una bola",1);
-        baño = new Room("en el baño","un mando",2);
-        vestuario = new Room("en el vestuario","unos calzones",2);
-        salaDeMaquinas = new Room("en la sala de maquinas","una cuerda",4);
+        entrada = new Room("entrada al gym");
+        salaDeClases= new Room("sala de clases");
+        baño = new Room("en el baño");
+        vestuario = new Room("en el vestuario");
+        salaDeMaquinas = new Room("en la sala de maquinas");
 
-        // initialise room exits(arriba,derecha,abajo,izquierda)
+        //objetos de las salas 
+        baño.addItem("un mando",2);
+        vestuario.addItem("unos calzones",2);
+            // initialise room exits(arriba,derecha,abajo,izquierda)
 
         entrada.setExit("east" , salaDeClases);
         entrada.setExit("south" , vestuario);
@@ -55,10 +58,8 @@ public class Game
         salaDeClases.setExit("north" , baño);
         salaDeClases.setExit("south" , salaDeMaquinas);
         salaDeClases.setExit("west" , entrada);
-        
 
         baño.setExit("south" , salaDeClases);
-
         vestuario.setExit("north" , entrada);
         vestuario.setExit("east" , salaDeMaquinas);
 
@@ -82,7 +83,7 @@ public class Game
         boolean salida =false;
         boolean finished = false;
         int cont = 0;
-        while(!finished && cont <= INTENTOS && !mando || !salida)
+        while(!finished && cont <= INTENTOS || !mando || !salida)
         {
             Command command = parser.getCommand();
             finished = processCommand(command);
@@ -151,10 +152,10 @@ public class Game
         else if (commandWord.equals("look")) {
             System.out.println(currentRoom.getLongDescription());
         }
-         else if (commandWord.equals("eat")) {
+        else if (commandWord.equals("eat")) {
             System.out.println("You have eaten now and you are not hungry any more");;
         }
-        
+
         return wantToQuit;
     }
 
@@ -224,6 +225,6 @@ public class Game
     private void printLocationInfo()
     {
         System.out.println(currentRoom.getLongDescription());
-        
+
     }
 }

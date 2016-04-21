@@ -21,6 +21,7 @@ public class Game
     private Parser parser;
     private Room currentRoom;
     private Stack<Room> passRoom;
+    private Player player;
     private static final int INTENTOS = 7;
     private static final String OBJETIVO ="en el baño";
     private static final String SALIDA_CON_OBJETIVO ="entrada al gym";
@@ -32,6 +33,7 @@ public class Game
     {
         createRooms();
         parser = new Parser();
+        player = new Player(currentRoom);
     }
 
     /**
@@ -70,7 +72,7 @@ public class Game
         salaDeMaquinas.setExit("northWest", entrada);
 
         currentRoom = entrada;  // start game outside
-        passRoom = new Stack<Room>();
+       
     }
 
     /**
@@ -188,26 +190,7 @@ public class Game
      */
     private void goRoom(Command command) 
     {
-        if(!command.hasSecondWord()) {
-            // if there is no second word, we don't know where to go...
-            System.out.println("Go where?");
-            return;
-        }
-
-        String direction = command.getSecondWord();
-
-        // Try to leave current room
-
-        Room nextRoom = currentRoom.getExit(direction);
-
-        if (nextRoom == null) {
-            System.out.println("There is no door!");
-        }
-        else {
-            passRoom.push(currentRoom);
-            currentRoom = nextRoom;
-            printLocationInfo();
-        }
+        player.goRoom(command);
     }
 
     /** 
@@ -238,13 +221,7 @@ public class Game
      * comando para que el jugador vuela atras 
      */
     private void goBack(){
-        if (!passRoom.empty()){
-            currentRoom = passRoom.pop();
-            printLocationInfo();
-        }
-        else{
-
-            System.out.println("Estas en el princpio no puedes ir mas atras");
-        }
+        player.goBack();
     }
+    
 }

@@ -98,5 +98,35 @@ public class Player
         }
     }
 
-    
+    /**
+     * Metodo tirar un objeto en una sala 
+     */
+    public void dropObject(Command command){
+        if(!command.hasSecondWord()) {
+            // if there is no second word, we don't know where to go...
+            System.out.println("Tirar que?");
+            return;
+        }
+
+        String objeto = command.getSecondWord();
+        
+        int index = 0;
+        boolean encontrado = false;
+        for(int i = 0; i < inventario.size() && !encontrado; i++) {
+            if (inventario.get(i).getItem().equals(objeto)){
+                index = i;
+                encontrado = true;
+            }
+        }
+        
+        if (encontrado){
+            pesoItem-= inventario.get(index).getPesoItem();
+            currentRoom.addItem(inventario.get(index).getItem(), inventario.get(index).getPesoItem(), true);
+            inventario.remove(index);  
+            System.out.println("has tirado el objeto");
+        }
+        else{
+            System.out.println("No puedes tirar este objeto");
+        }
+    }
 }

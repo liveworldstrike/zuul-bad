@@ -165,7 +165,7 @@ public class Game
             goBack();
         }
         else if (commandWord.equals("drop")) {
-            
+            player.dropObject(command);
         }
         else if (commandWord.equals("take")) {
             player.takeObject(command);

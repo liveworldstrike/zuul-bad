@@ -18,7 +18,7 @@ public class Room
 {
     private String description;
     private HashMap<String, Room> exits;
-    private ArrayList<Item> items;
+    private HashMap<String, Item> items;
 
     /**
      * Create a room described "description". Initially, it has
@@ -29,7 +29,7 @@ public class Room
     public Room(String description) 
     {
         this.description = description;
-        items = new ArrayList<Item>(0);
+        items = new HashMap<>();
         exits = new HashMap<>();
 
     }
@@ -83,7 +83,7 @@ public class Room
     public String getLongDescription(){
         String longDescription = getDescription() + "\nObjetos en la sala:";
         if (items.size() > 0){
-            for(Item objItem : items){
+            for(Item objItem : items.values()){
                 longDescription += ""  + objItem.getLongDescription();
 
             }
@@ -98,7 +98,28 @@ public class Room
     /**
      * añade un item a la habitacion
      */
-    public void addItem(String item,float pesoItem){
-        items.add(new Item(item,pesoItem));
+    public void addItem(String item,float pesoItem,boolean cogerse){
+        items.put(item ,new Item(item,pesoItem,cogerse));
+    }
+
+    /**
+     * devuelve nombre del item
+     */
+    public Item getItem(String nombreObj){
+        return items.get(nombreObj);
+    }
+
+    /**
+     * elimina el item 
+     */
+    public void removeItem(String nombreObj){
+        items.remove(nombreObj);
+    }
+
+    /**
+     * devuelve el numero de items
+     */ 
+    public int getNumberItem(){
+        return items.size();
     }
 }

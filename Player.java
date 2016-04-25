@@ -82,7 +82,7 @@ public class Player
             System.out.println("No hay objetos en la sala!!");
         }
 
-        if (currentRoom.getItem(objeto).cogerse()){
+        if ( currentRoom.getItem(objeto) != null && currentRoom.getItem(objeto).cogerse()){
             if (pesoItem + currentRoom.getItem(objeto). getPesoItem() <= PESO_MAX){
                 inventario.add(currentRoom.getItem(objeto));
                 pesoItem += currentRoom.getItem(objeto). getPesoItem();
@@ -128,5 +128,17 @@ public class Player
         else{
             System.out.println("No puedes tirar este objeto");
         }
+    }
+    
+    /**
+     * mostrar el inventario del jugador 
+     * 
+     */
+    public void showObjects(Command command){
+       System.out.println("Tines estos objetos");
+        for(Item objetoInventario : inventario){
+           System.out.println(objetoInventario.getItem());
+        }
+        System.out.println("Peso actual: " + pesoItem);
     }
 }

@@ -171,7 +171,7 @@ public class Game
             player.takeObject(command);
         }
          else if (commandWord.equals("items")) {
-          
+          player.showObjects(command);
         }
 
         return wantToQuit;

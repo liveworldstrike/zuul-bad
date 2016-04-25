@@ -51,8 +51,9 @@ public class Game
         salaDeMaquinas = new Room("en la sala de maquinas");
 
         //objetos de las salas 
-        baño.addItem("un mando",2);
-        vestuario.addItem("unos calzones",2);
+        baño.addItem("mando",2,true);
+        vestuario.addItem("calzones",2,false);
+        salaDeClases.addItem("proteinas",6,true);
         // initialise room exits(arriba,derecha,abajo,izquierda)
 
         entrada.setExit("east" , salaDeClases);
@@ -72,7 +73,7 @@ public class Game
         salaDeMaquinas.setExit("northWest", entrada);
 
         currentRoom = entrada;  // start game outside
-       
+
     }
 
     /**
@@ -163,6 +164,15 @@ public class Game
         else if (commandWord.equals("back")) {
             goBack();
         }
+        else if (commandWord.equals("drop")) {
+            
+        }
+        else if (commandWord.equals("take")) {
+            player.takeObject(command);
+        }
+         else if (commandWord.equals("items")) {
+          
+        }
 
         return wantToQuit;
     }
@@ -223,5 +233,5 @@ public class Game
     private void goBack(){
         player.goBack();
     }
-    
+
 }

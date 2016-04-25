@@ -9,15 +9,16 @@ public class Item
 {
     private String item;
     private float pesoItem;
-    
+    private boolean cogerse;
 
     /**
      * Constructor for objects of class Item
      */
-    public Item(String item,float pesoItem)
+    public Item(String item,float pesoItem,boolean cogerse)
     {
         this.item=item;
         this.pesoItem=pesoItem;
+        this.cogerse = true;
     }
 
     /**
@@ -43,5 +44,13 @@ public class Item
     public String getLongDescription(){
         String descripcionItem = item + "("+ pesoItem + ")";
         return  descripcionItem;
+    }
+    
+    /**
+     * si puede cojerse el item
+     */
+    public boolean cogerse()
+    {
+        return cogerse;
     }
 }

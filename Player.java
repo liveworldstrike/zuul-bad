@@ -10,7 +10,7 @@ public class Player
     private Room currentRoom;
     private Stack<Room> habitaciones;
     private float pesoItem;
-    public static  final float PESO_MAX = 8F;
+    public static  final float PESO_MAX = 7F;
     private ArrayList<Item> inventario;
 
     /**
@@ -84,11 +84,11 @@ public class Player
         if (currentRoom.getNumberItem() == 0) {
             System.out.println("No hay objetos en la sala!!");
         }
-
-        if ( currentRoom.getItem(objeto) != null && currentRoom.getItem(objeto).cogerse()){
-            if (pesoItem + currentRoom.getItem(objeto). getPesoItem() <= PESO_MAX){
-                inventario.add(currentRoom.getItem(objeto));
-                pesoItem += currentRoom.getItem(objeto). getPesoItem();
+        Item objetoCoge = currentRoom.getItem(objeto);
+        if ( objetoCoge != null && objetoCoge.cogerse()){
+            if (pesoItem + objetoCoge. getPesoItem() <= PESO_MAX){
+                inventario.add(objetoCoge);
+                pesoItem += objetoCoge. getPesoItem();
                 currentRoom.removeItem(objeto);
                 System.out.println("has cogido el objeto ");
             }

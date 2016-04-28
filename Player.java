@@ -28,18 +28,20 @@ public class Player
      * Try to go in one direction. If there is an exit, enter
      * the new room, otherwise print an error message.
      */
-    public void goRoom(Command command) 
+    public Room goRoom(Command command) 
     {
         if(!command.hasSecondWord()) {
             // if there is no second word, we don't know where to go...
             System.out.println("Go where?");
-            return;
+            return null;
         }
 
         String direction = command.getSecondWord();
 
         // Try to leave current room
-
+        if (currentRoom.getExit(direction)!= null){
+            habitaciones.push(currentRoom);
+        }
         Room nextRoom = currentRoom.getExit(direction);
 
         if (nextRoom == null) {
@@ -50,6 +52,7 @@ public class Player
             currentRoom = nextRoom;
             System.out.println(currentRoom.getLongDescription());
         }
+        return currentRoom;
     }
 
     /**

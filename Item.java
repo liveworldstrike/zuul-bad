@@ -18,7 +18,7 @@ public class Item
     {
         this.item=item;
         this.pesoItem=pesoItem;
-        this.cogerse = true;
+        this.cogerse = cogerse;
     }
 
     /**

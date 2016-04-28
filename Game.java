@@ -200,7 +200,10 @@ public class Game
      */
     private void goRoom(Command command) 
     {
-        player.goRoom(command);
+        Room newRoom = player.goRoom(command);
+        if( newRoom !=null){
+            currentRoom = newRoom;
+        }
     }
 
     /** 

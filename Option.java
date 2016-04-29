@@ -7,5 +7,8 @@
  */
 public enum Option
 {
-
+    go, quit, help,look,eat,back,take,drop,items,UNKNOWN;
 }
+
+
+ 

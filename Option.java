@@ -7,8 +7,24 @@
  */
 public enum Option
 {
-    go, quit, help,look,eat,back,take,drop,items,UNKNOWN;
-}
+    go("andare"), quit("smettere"),help("aiuto"),look("guarda"),eat("mangiare"),back("indietro"),take("prendere"),
+    drop("far_cadere"),items("elementi"),UNKNOWN("");
 
+    private String comandoJug;
+    /**
+     * contructor clase option
+     */
+    private Option (String comandoJug){
+        this.comandoJug = comandoJug;
+    }
+
+    /**
+     * devuelve el string del comandoJug
+     */
+    public String getComandoJug(){
+
+        return comandoJug;
+    }
+}
 
  

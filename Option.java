@@ -7,8 +7,12 @@
  */
 public enum Option
 {
-    go("andare"), quit("smettere"),help("aiuto"),look("guarda"),eat("mangiare"),back("indietro"),take("prendere"),
-    drop("far_cadere"),items("elementi"),UNKNOWN("");
+    go("andare"), 
+    quit("smettere"),help("aiuto"),
+    look("guarda"),eat("mangiare"),back("indietro"),take("prendere"),
+    drop("far_cadere"),
+    items("elementi"),
+    UNKNOWN("");
 
     private String comandoJug;
     /**

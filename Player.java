@@ -48,7 +48,6 @@ public class Player
             System.out.println("There is no door!");
         }
         else {
-            habitaciones.push(currentRoom);
             currentRoom = nextRoom;
             System.out.println(currentRoom.getLongDescription());
         }
@@ -112,7 +111,7 @@ public class Player
         }
 
         String objeto = command.getSecondWord();
-        
+
         int index = 0;
         boolean encontrado = false;
         for(int i = 0; i < inventario.size() && !encontrado; i++) {
@@ -121,7 +120,7 @@ public class Player
                 encontrado = true;
             }
         }
-        
+
         if (encontrado){
             pesoItem-= inventario.get(index).getPesoItem();
             currentRoom.addItem(inventario.get(index).getItem(), inventario.get(index).getPesoItem(), true);
@@ -132,15 +131,15 @@ public class Player
             System.out.println("No puedes tirar este objeto");
         }
     }
-    
+
     /**
      * mostrar el inventario del jugador 
      * 
      */
     public void showObjects(Command command){
-       System.out.println("Tines estos objetos");
+        System.out.println("Tines estos objetos");
         for(Item objetoInventario : inventario){
-           System.out.println(objetoInventario.getItem());
+            System.out.println(objetoInventario.getItem());
         }
         System.out.println("Peso actual: " + pesoItem);
     }

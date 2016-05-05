@@ -23,8 +23,8 @@ public class Game
     private Stack<Room> passRoom;
     private Player player;
     private static final int INTENTOS = 7;
-    private static final String OBJETIVO ="en el baño";
-    private static final String SALIDA_CON_OBJETIVO ="entrada al gym";
+    
+ 
 
     /**
      * Create the game and initialise its internal map.
@@ -89,33 +89,20 @@ public class Game
         boolean salida =false;
         boolean finished = false;
         int cont = 0;
-        while(!finished) //&& cont <= INTENTOS || !mando || !salida)
-        {
+        while(!finished && cont <= INTENTOS){
             Command command = parser.getCommand();
             finished = processCommand(command);
-            //             cont++;
-            //             if (currentRoom.getDescription().equals(OBJETIVO)){
-            //                 mando = true;
-            //                 System.out.println("you take the gamepad,RUN TO ENTRADA");
-            // 
-            //             }
-            //             if (currentRoom.getDescription().equals(SALIDA_CON_OBJETIVO)){
-            //                 salida = true;
-            // 
-            //             }
+            cont++;
         }
 
         if(finished){
             System.out.println("you exit the game");
         }
-
-        else if (salida && mando){
-            System.out.println("YOU WIN,RUN TO THE TOURNAMENT!!!!");
-            System.out.println("THANKS FOR PLAYING");
-        }
-        else if ( cont >= INTENTOS){
+        else if ( cont > INTENTOS){
+            System.out.println("");
             System.out.println("TOO LATE YOU LOSE");
         }
+        
     }
 
     /**

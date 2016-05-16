@@ -21,16 +21,17 @@ public class Game
     private Parser parser;
     private Room currentRoom;
     private Stack<Room> passRoom;
+    private ArrayList<Room> SalasobjetoRamdom;
+    private Room habitacionClave;
     private Player player;
-    private static final int INTENTOS = 7;
-    
- 
+    private int INTENTOS = 7;
 
     /**
      * Create the game and initialise its internal map.
      */
     public Game() 
     {
+        SalasobjetoRamdom = new ArrayList<Room>();
         createRooms();
         parser = new Parser();
         player = new Player(currentRoom);
@@ -44,14 +45,13 @@ public class Game
         Room entrada, salaDeClases, baño , vestuario, salaDeMaquinas ;
 
         // create the rooms
-        entrada = new Room("entrada al gym");
+        entrada = new Room("gym");
         salaDeClases= new Room("sala de clases");
         baño = new Room("en el baño");
         vestuario = new Room("en el vestuario");
         salaDeMaquinas = new Room("en la sala de maquinas");
 
         //objetos de las salas 
-        baño.addItem("mando",2,true);
         vestuario.addItem("calzones",2,false);
         salaDeClases.addItem("proteinas",6,true);
         // initialise room exits(arriba,derecha,abajo,izquierda)
@@ -74,6 +74,14 @@ public class Game
 
         currentRoom = entrada;  // start game outside
 
+        //para crear el objeto en cualquier habitacion que sea ramdom
+        SalasobjetoRamdom.add(salaDeClases);
+        SalasobjetoRamdom.add(baño);
+        SalasobjetoRamdom.add(vestuario);
+        SalasobjetoRamdom.add(salaDeMaquinas);
+        Random aleatorio = new Random();
+        habitacionClave = SalasobjetoRamdom.get(aleatorio.nextInt(SalasobjetoRamdom.size()-1));
+        habitacionClave.addItem("mando",2,true);
     }
 
     /**
@@ -85,24 +93,43 @@ public class Game
 
         // Enter the main command loop.  Here we repeatedly read commands and
         // execute them until the game is over.
-        boolean mando = false;
-        boolean salida =false;
         boolean finished = false;
-        int cont = 0;
-        while(!finished && cont <= INTENTOS){
+        boolean finalizacion = false;
+        boolean ganar = false;
+        String salida = "gym";
+
+        while(!finished && 0 < INTENTOS &&!ganar){
+            System.out.println("=============================================");
+            System.out.println("TE QUEDAN " + INTENTOS + " MOVIMIENTOS");
+            System.out.println("=============================================");
             Command command = parser.getCommand();
             finished = processCommand(command);
-            cont++;
+            if (player.objClave()&& !finalizacion){
+                System.out.println("=============================================");
+                System.out.println("you take the mando run to de exit ");
+                System.out.println("=============================================");
+                finalizacion = true;
+            }
+            if(finalizacion && currentRoom.getDescription().equals(salida)){
+                ganar = true;
+            }
+            INTENTOS--;
         }
 
         if(finished){
+            System.out.println("==============================================");
             System.out.println("you exit the game");
         }
-        else if ( cont > INTENTOS){
-            System.out.println("");
+        else if ( INTENTOS <=0){
+            System.out.println("=========================================");
             System.out.println("TOO LATE YOU LOSE");
         }
-        
+        else if (ganar){
+            System.out.println("");
+            System.out.println("=================================================================================");
+            System.out.println("YOU WIN THE GAME ");
+            System.out.println("thanks for playing ");
+        }
     }
 
     /**

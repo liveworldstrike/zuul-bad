@@ -143,4 +143,17 @@ public class Player
         }
         System.out.println("Peso actual: " + pesoItem);
     }
+    
+    /**
+     * metodo para saber si tiene el objeto clave para finalizar el juego 
+     */
+    public boolean objClave(){
+        boolean objClave = false;
+        for(Item objetoInventario : inventario){
+            if ( objetoInventario.getItem().equals("mando")){
+                objClave = true;
+            } 
+        }
+        return objClave;
+    }
 }

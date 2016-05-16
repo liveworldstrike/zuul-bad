@@ -1,0 +1,7 @@
+1-la primera funcionalidad es que si el jugador no ha terminado el juego en x turnos el juego se dara como game over
+  y perdera
+  Se le mostrara por pantalla los movimientos que le quedan ,estos movimientos si se escribe algo mal contara tambien.
+ 
+2 -para poder terminar el juego el jugador tiene que encontrar el mando para llegar al torneo 
+ y salir  por la entrada antes de que se pase de los turnos x.
+ El mando sera aleatorio saldra en una sala cualquiera.
